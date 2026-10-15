@@ -70,10 +70,69 @@ let dapatDiskon = sudahMember || totalPesanan > 100000; // Seharusnya true karen
 
 console.log(totalPesanan, uangPas, jumlahMember, dapatDiskon); // 51000 true 6 true
 
-// Jawaban pertanyaan Langkah 2 bahasaku:
+// Jawaban pertanyaan Langkah 2 :
 // 1. Kesalahan 1: total salah karena gak pakai kurung -> perbaiki pakai (hargaKopi+hargaTeh)*2
 //    Kesalahan 2: uangPas tadinya gak pas karena hitungan total salah -> benerin total dulu jadi pas
 //    Kesalahan 3: jumlahMember + 1 gak disimpan -> perbaiki pakai +=1
 //    Kesalahan 4: && harusnya || karena soalnya bilang ATAU bukan DAN
 // 2. Kalau ganti == jadi === hasilnya false karena tipe beda string vs number. Biar true harus ubah uangDiterima jadi number pakai Number(uangDiterima) atau pakai == aja
 // 3. && itu DAN harus dua-duanya true baru true, || itu ATAU salah satu true aja udah true. Contoh dapatDiskon pakai || jadi kalau sudahMember true aja udah dapet diskon walau total gak >100000
+
+
+// ============ LANGKAH 3: BIKIN KASIR SENDIRI ============
+const NAMA_BARANG = "Kopi Susu Gula Aren";
+const HARGA_SATUAN = 18000;
+const TARIF_PAJAK = 0.11;
+
+let jumlahBeli = 4;
+let uangDibayar = 100000;
+
+// Hitung subtotal, pajak, total
+let subtotal = HARGA_SATUAN * jumlahBeli; // 72000
+let pajak = subtotal * TARIF_PAJAK; // 7920
+let totalBayar = subtotal + pajak; // 79920
+
+// Pakai 2 operator penugasan ringkas
+let potongan = 5000;
+totalBayar -= potongan; // Syarat 1: pakai -=, total jadi 74920, ini diskon member
+let poinMember = 10;
+poinMember += jumlahBeli; // Syarat 2: pakai +=, poin jadi 14
+
+let kembalian = uangDibayar - totalBayar; // 25080
+
+// Cek genap pakai %
+let jumlahGenap = jumlahBeli % 2 === 0; // true karena 4 sisa 0
+
+// 3 Boolean pakai perbandingan dan logika
+let uangCukup = uangDibayar >= totalBayar; // true
+let gratisKantong = subtotal >= 50000 || jumlahBeli >= 5; // true karena subtotal 72000
+let dapatBonus = uangCukup && jumlahGenap; // true karena dua-duanya true
+
+// Pakai kurung biar jelas urutannya
+let totalTanpaPajakSalah = HARGA_SATUAN + HARGA_SATUAN * TARIF_PAJAK; // tanpa kurung dikali dulu
+let totalDenganKurung = (HARGA_SATUAN + HARGA_SATUAN) * TARIF_PAJAK; // dengan kurung tambah dulu
+
+console.log("Barang      : " + NAMA_BARANG);
+console.log("Jumlah      : " + jumlahBeli);
+console.log("Subtotal    : " + subtotal);
+console.log("Pajak (11%) : " + pajak);
+console.log("Potongan    : " + potongan);
+console.log("Total bayar : " + totalBayar);
+console.log("Uang dibayar: " + uangDibayar);
+console.log("Kembalian   : " + kembalian);
+console.log("Uang cukup? : " + uangCukup);
+console.log("Gratis kantong? : " + gratisKantong);
+console.log("Dapat bonus genap? : " + dapatBonus);
+console.log("Jumlah genap? : " + jumlahGenap);
+
+// Jawaban pertanyaan Langkah 3 :
+// 1. Aku pilih uangCukup = uangDibayar >= totalBayar. Artinya uang yang dibawa pembeli cukup gak buat bayar. Hasil sekarang true karena 100000 lebih besar dari 74920 jadi cukup.
+// 2. Aku coba ganti gratisKantong dari || jadi &&. Sebelum pakai || hasilnya true karena subtotal 72000 udah cukup. Sesudah ganti && jadi false karena harus dua syarat: subtotal >=50000 true tapi jumlahBeli >=5 false, true && false = false. Jadi berubah.
+// 3. Contoh kurung di totalDenganKurung. Dengan kurung (18000+18000)*0.11 = 3960. Tanpa kurung 18000+18000*0.11 = 19980. Beda jauh karena kalau gak pakai kurung kali dulu baru tambah.
+
+// ============ BONUS +5 ============
+let totalMenit = 250;
+let jam = Math.floor(totalMenit / 60); // bagi dapet jam
+let menitSisa = totalMenit % 60; // sisa bagi dapet menit sisanya
+console.log(jam + " jam " + menitSisa + " menit"); // 4 jam 10 menit
+// Penjelasan bonus bahasaku: / buat dapet jamnya berapa, % buat dapet sisa menit yang gak cukup sejam. Makanya 250/60 = 4 sisa 10, jadi 4 jam 10 menit.
