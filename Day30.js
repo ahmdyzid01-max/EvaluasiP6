@@ -66,3 +66,61 @@ switch (hari) {
     console.log("Tidak ada promo");
 }
 
+// =======================
+// Langkah 2: Perbaiki 5 Kesalahan
+// =======================
+let totalBelanja = 80000;
+let jenisMember = "gold";
+let kodeVoucher = "";
+let diskon;
+let potonganMember;
+
+// FIX 1: Urutan diskon harus dari terbesar ke terkecil
+if (totalBelanja >= 100000) {
+  diskon = totalBelanja * 0.15;
+} else if (totalBelanja >= 50000) {
+  diskon = totalBelanja * 0.1;
+} else if (totalBelanja >= 25000) {
+  diskon = totalBelanja * 0.05;
+} else {
+  diskon = 0;
+}
+
+// FIX 2: Typo jenismember -> jenisMember
+// FIX 3: Tambah break di case gold biar gak jatuh ke silver
+switch (jenisMember) {
+  case "gold":
+    potonganMember = 5000;
+    break;
+  case "silver":
+    potonganMember = 2000;
+    break;
+  default:
+    potonganMember = 0;
+}
+
+// FIX 4: Pakai === bukan = . = itu assignment, hasilnya "" yang falsy
+if (kodeVoucher === "") {
+  console.log("Voucher tidak dipakai");
+} else {
+  console.log("Voucher dipakai: " + kodeVoucher);
+}
+
+let totalAkhir = totalBelanja - diskon - potonganMember;
+
+// FIX 5: Pakai >= biar uang pas tetap lunas
+let uangBayar = 67000;
+if (uangBayar >= totalAkhir) {
+  console.log("Status: Lunas");
+} else {
+  console.log("Status: Kurang");
+}
+
+console.log(diskon, potonganMember, totalAkhir);
+// Output harus: Voucher tidak dipakai, Status: Lunas, 8000 5000 67000
+
+// Pertanyaan Langkah 2:
+// 1. (1) Urutan if diskon kebalik - perbaiki urut dari 100k dulu. (2) Typo jenismember - perbaiki jadi jenisMember. (3) Lupa break di gold - tambah break. (4) Salah pakai = - ganti jadi ===. (5) Kondisi lunas pakai > - ganti jadi >=.
+// 2. Yang error merah di console: typo jenismember (ReferenceError). 4 lainnya tidak error tapi logic salah.
+// 3. = itu untuk mengisi nilai, == banding nilai saja, === banding nilai + tipe. Tidak error karena (kodeVoucher = "") adalah expression yang sah, hasilnya string kosong yang masih valid di dalam if.
+
