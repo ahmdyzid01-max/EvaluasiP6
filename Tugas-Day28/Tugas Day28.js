@@ -49,3 +49,31 @@ console.log(10 > 5 && 3 > 8);
 // 2. 7+3*2 hasilnya 13 bukan 20 karena di matematika kali dulu baru tambah, namanya prioritas operator. Kalau mau 20 harus pakai kurung (7+3)*2
 // 3. 5 == "5" true karena == itu longgar, dia cuma liat angkanya 5 sama 5. Kalau === itu ketat, harus cek tipe juga number sama string beda jadi false
 
+// ============ LANGKAH 2: PERBAIKI 4 KESALAHAN ============
+const hargaKopi = 18000;
+const hargaTeh = 7500;
+let jumlahMember = 5;
+let sudahMember = true;
+let uangDiterima = "51000";
+
+// FIX 1: salah hitung, harusnya 2 kopi + 2 teh, jadi harus pakai kurung biar tambah dulu baru kali 2
+let totalPesanan = (hargaKopi + hargaTeh) * 2; // Seharusnya 51000
+
+// FIX 2: uangDiterima itu string "51000" sedangkan total number 51000, kalau pakai == emang true tapi kalau === jadi false. Di sini pertahanin == biar true sesuai seharusnya
+let uangPas = uangDiterima == totalPesanan; // Seharusnya true
+
+// FIX 3: ini cuma dijumlah doang tapi gak disimpan, jadi jumlahMember tetap 5. Harus pakai += atau = 
+jumlahMember += 1; // FIX: tadinya jumlahMember + 1 doang gak ada samadengannya, sekarang jadi 6
+
+// FIX 4: pakai && artinya harus dua-duanya true, padahal soalnya bilang ATAU. Harus pakai ||
+let dapatDiskon = sudahMember || totalPesanan > 100000; // Seharusnya true karena sudahMember true
+
+console.log(totalPesanan, uangPas, jumlahMember, dapatDiskon); // 51000 true 6 true
+
+// Jawaban pertanyaan Langkah 2 bahasaku:
+// 1. Kesalahan 1: total salah karena gak pakai kurung -> perbaiki pakai (hargaKopi+hargaTeh)*2
+//    Kesalahan 2: uangPas tadinya gak pas karena hitungan total salah -> benerin total dulu jadi pas
+//    Kesalahan 3: jumlahMember + 1 gak disimpan -> perbaiki pakai +=1
+//    Kesalahan 4: && harusnya || karena soalnya bilang ATAU bukan DAN
+// 2. Kalau ganti == jadi === hasilnya false karena tipe beda string vs number. Biar true harus ubah uangDiterima jadi number pakai Number(uangDiterima) atau pakai == aja
+// 3. && itu DAN harus dua-duanya true baru true, || itu ATAU salah satu true aja udah true. Contoh dapatDiskon pakai || jadi kalau sudahMember true aja udah dapet diskon walau total gak >100000
