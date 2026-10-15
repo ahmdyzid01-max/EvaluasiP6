@@ -86,3 +86,148 @@ console.log(cekAngka(5)); // Hasil asli: bukan negatif
 // Jawaban pertanyaan Langkah 1C:
 // 3. Tetap menghasilkan angka karena ada nilai default persen=10 jadi kalau tidak diisi tetap dihitung. Baris console.log setelah return tidak tercetak karena return menghentikan function.
 
+// ---------- LANGKAH 2: Perbaiki 7 Kesalahan ----------
+let daftarBelanja = ["Kopi", "Teh", "Roti"];
+
+// FIX 1: unshift salah, seharusnya push untuk tambah di akhir
+daftarBelanja.push("Susu"); // Seharusnya: ["Kopi", "Teh", "Roti", "Susu"]
+
+// FIX 2: slice tidak mengubah array, seharusnya splice untuk hapus
+daftarBelanja.splice(1, 1); // Seharusnya: ["Kopi", "Roti", "Susu"]
+
+// FIX 3: indexOf mengembalikan angka, seharusnya includes untuk dapat true/false
+let adaRoti = daftarBelanja.includes("Roti"); // Seharusnya: true
+
+// FIX 4: length itu di luar index, seharusnya length - 1 untuk elemen terakhir
+let terakhir = daftarBelanja[daftarBelanja.length - 1]; // Seharusnya: "Susu"
+
+// FIX 5: function tidak ada return, jadi hasilnya undefined
+function hitungDiskon(harga, persen) {
+  return harga - (harga * persen) / 100; // FIX: tambah return
+}
+
+// FIX 6: arrow function pakai kurung kurawal harus ada return
+const hitungPajak = (subtotal) => {
+  return subtotal * 0.11; // FIX: tambah return
+};
+
+console.log(daftarBelanja, adaRoti, terakhir);
+console.log(hitungDiskon(100000, 20));
+console.log(hitungPajak(80000));
+
+// FIX 7: const arrow function tidak bisa dipanggil sebelum didefinisikan (hoisting), pindah ke atas sebelum dipanggil
+const hitungTotal = (subtotal, pajak) => subtotal + pajak; // FIX: definisi dipindah ke atas pemanggilan
+console.log(hitungTotal(80000, 8800));
+
+// Jawaban pertanyaan Langkah 2:
+// 1. Daftar 7 kesalahan:
+// - Kesalahan 1: pakai unshift padahal mau tambah di akhir, perbaiki jadi push.
+// - Kesalahan 2: pakai slice yang tidak mengubah array, perbaiki jadi splice(1,1).
+// - Kesalahan 3: pakai indexOf yang hasilnya angka, perbaiki jadi includes.
+// - Kesalahan 4: akses index pakai length yang out of bounds, perbaiki jadi length-1.
+// - Kesalahan 5: hitungDiskon tidak pakai return, perbaiki tambah return.
+// - Kesalahan 6: hitungPajak arrow pakai {} tapi tidak return, perbaiki tambah return.
+// - Kesalahan 7: hitungTotal dipanggil sebelum didefinisikan padahal const, perbaiki pindah definisi ke atas.
+// 2. Yang menyebabkan error di console: Kesalahan 7 karena ReferenceError Cannot access before initialization. Sisanya tidak error tapi hasilnya salah/undefined.
+// 3. hitungDiskon dan hitungPajak sama-sama undefined karena lupa return. Yang satu function declaration tanpa return, yang satu arrow function dengan blok {} tapi tidak ada return, jadi keduanya default return undefined.
+
+// ---------- LANGKAH 3: Bikin Kasir Sendiri ----------
+const kasirNamaMenu = ["Kopi Susu", "Es Teh", "Roti Bakar", "Nasi Goreng", "Jus Jeruk"];
+const kasirHargaMenu = [18000, 7500, 15000, 22000, 12000];
+let kasirKeranjang = [];
+
+// Syarat 1: Kelola keranjang dengan array method
+kasirKeranjang.push("Kopi Susu"); // tambah di akhir
+kasirKeranjang.push("Es Teh");
+kasirKeranjang.push("Roti Bakar");
+kasirKeranjang.unshift("Jus Jeruk"); // prioritas di depan
+kasirKeranjang.push("Nasi Goreng");
+console.log("Keranjang sebelum dibatalkan:", kasirKeranjang);
+kasirKeranjang.pop(); // batalkan 1 item terakhir (Nasi Goreng) -> contoh pop
+kasirKeranjang.push("Nasi Goreng"); // tambah lagi
+kasirKeranjang.splice(2, 1, "Es Teh"); // ganti item index 2 jadi Es Teh (contoh splice ganti)
+
+// Syarat 2: includes dan slice
+let kasirCekEsTeh = kasirKeranjang.includes("Es Teh");
+let kasirPaketCepat = kasirKeranjang.slice(0, 3);
+console.log("Apakah ada Es Teh?", kasirCekEsTeh);
+console.log("Paket cepat 3 item:", kasirPaketCepat);
+
+// Syarat 3: Function declaration cari harga
+function kasirCariHarga(namaMenu) {
+  let indeks = kasirNamaMenu.indexOf(namaMenu);
+  if (indeks === -1) {
+    return 0;
+  }
+  return kasirHargaMenu[indeks];
+}
+
+// Syarat 4: Function expression hitung subtotal
+const kasirHitungSubtotal = function () {
+  let total = 0;
+  for (let i = 0; i < kasirKeranjang.length; i++) {
+    total += kasirCariHarga(kasirKeranjang[i]);
+  }
+  return total;
+};
+
+// Syarat 5: Arrow function dengan {} dan return untuk diskon
+const kasirHitungDiskon = (subtotal) => {
+  if (subtotal >= 100000) {
+    return subtotal * 0.15;
+  } else if (subtotal >= 50000) {
+    return subtotal * 0.10;
+  } else if (subtotal >= 25000) {
+    return subtotal * 0.05;
+  } else {
+    return 0;
+  }
+};
+
+// Syarat 6: Arrow ringkas satu baris dengan default
+const kasirHitungPajak = (nilai, tarif = 0.11) => nilai * tarif;
+
+// Syarat 7: Function cetak struk
+function kasirCetakStruk(subtotal, diskon, pajak) {
+  let totalAkhir = subtotal - diskon + pajak;
+  console.log(`\n===== STRUK YB WARKOP =====`);
+  console.log(`Daftar Belanja:`);
+  for (let i = 0; i < kasirKeranjang.length; i++) {
+    console.log(`${i + 1}. ${kasirKeranjang[i]} - Rp${kasirCariHarga(kasirKeranjang[i])}`);
+  }
+  console.log(`---------------------------`);
+  console.log(`Subtotal : Rp${subtotal}`);
+  console.log(`Diskon : Rp${diskon}`);
+  console.log(`Pajak 11%: Rp${pajak}`);
+  console.log(`Total : Rp${totalAkhir}`);
+  console.log(`===========================\n`);
+  return totalAkhir;
+}
+
+// Syarat 8 & 9: Uji 2 skenario
+// Skenario 1: Keranjang sedang -> diskon 10%
+kasirKeranjang = ["Kopi Susu", "Es Teh", "Roti Bakar", "Jus Jeruk"]; // 18000+7500+15000+12000 = 52500
+let sub1 = kasirHitungSubtotal();
+let disc1 = kasirHitungDiskon(sub1);
+let pajak1 = kasirHitungPajak(sub1 - disc1);
+kasirCetakStruk(sub1, disc1, pajak1);
+// Skenario 1: keranjang berisi ["Kopi Susu", "Es Teh", "Roti Bakar", "Jus Jeruk"]
+// Hasil:
+// Subtotal: 52500
+// Diskon : 5250 (10%)
+// Pajak : 5197.5
+// Total : 52447.5
+
+// Skenario 2: Keranjang besar -> diskon 15%
+kasirKeranjang = ["Nasi Goreng", "Nasi Goreng", "Kopi Susu", "Kopi Susu", "Roti Bakar", "Jus Jeruk"]; // 22000*2 + 18000*2 + 15000 + 12000 = 107000
+let sub2 = kasirHitungSubtotal();
+let disc2 = kasirHitungDiskon(sub2);
+let pajak2 = kasirHitungPajak(sub2 - disc2, 0.11); // coba dengan 2 argumen
+kasirCetakStruk(sub2, disc2, pajak2);
+// Skenario 2: keranjang berisi ["Nasi Goreng", "Nasi Goreng", "Kopi Susu", "Kopi Susu", "Roti Bakar", "Jus Jeruk"]
+// Hasil:
+// Subtotal: 107000
+// Diskon : 16050 (15%)
+// Pajak : 10004.5
+// Total : 100954.5
+

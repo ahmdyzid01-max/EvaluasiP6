@@ -1,6 +1,6 @@
 # Tugas JavaScript: Sistem Data Usaha UMKM
-Nama: [isi namamu]
-NIM: [isi NIM-mu]
+Nama: Ahmad Yazid 
+
 
 ## 3 Hal yang aku pelajari
 1. Perbedaan null dan undefined serta kapan pakai yang mana.
