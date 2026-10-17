@@ -344,3 +344,12 @@ function cetakLaporanHarian() {
 
 cetakLaporanHarian();
 
+/*
+Jawaban:
+1. for...of untuk array (riwayat, itemValid), for...in untuk object (hitung).
+2. for...of langsung ambil value, lebih aman untuk array.
+3. continue dipakai untuk skip transaksi yang tidak LUNAS saat hitung menu terlaris.
+4. Object hitung dipakai untuk menampung jumlah per menu, key nya nama menu.
+5. rataRata dihitung dari totalPendapatan dibagi jumlah LUNAS agar tidak termasuk yang gagal.
+6. Laporan dibuat dengan template literal agar struk rapi dan mudah dibaca.
+*/
