@@ -1,5 +1,3 @@
-<<<<<<<<<<<<<<HEAD
-
 # Evaluasi Pekan 6 - Kedai Senja
 
 Proyek kasir sederhana untuk Kedai Senja. Menghitung subtotal, diskon, promo, pajak, total, kembalian, dan status pembayaran. Dilengkapi latihan logika, perbaikan kode, dan eksperimen JavaScript.
