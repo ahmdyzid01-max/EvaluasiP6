@@ -97,3 +97,25 @@ for (let kunci in harga) { // FIX: for...of tidak bisa untuk object, harus for..
   console.log(kunci + ": " + harga[kunci]);
 }
 
+/*
+CATATAN BUG (15):
+1. this.saldo (bayar baris 1) - Tidak error tapi hasil salah (NaN / error ReferenceError kalau strict) - Penyebab: lupa this di object method.
+2. return saldo (bayar baris 2) - Tidak error tapi hasil salah - Penyebab: sama, lupa this.
+3. i <= keranjang.length - Tidak error tapi hasil salah (subtotal jadi NaN) - Penyebab: off-by-one, index terakhir undefined.
+4. Urutan if diskon - Tidak error tapi hasil salah - Penyebab: kondisi lebih kecil dicek duluan.
+5. switch tanpa break - Tidak error tapi hasil salah - Penyebab: fall-through.
+6. pajak tanpa kurung - Tidak error tapi hasil salah - Penyebab: * dikerjakan duluan sebelum -.
+7. parseInt("100.000") - Tidak error tapi hasil salah (100) - Penyebab: parseInt berhenti di karakter non-angka.
+8. if (uangBayar = total) - Tidak error tapi hasil salah - Penyebab: pakai assignment bukan comparison.
+9. slice(0) untuk nama - Tidak error tapi hasil salah ("Rrina") - Penyebab: slice(0) mengambil semua string.
+10. keranjang.slice(1,1) - Tidak error tapi hasil salah (array tidak berubah) - Penyebab: slice tidak mutasi array, harus splice.
+11. keranjang.unshift - Tidak error tapi hasil salah (posisi salah) - Penyebab: unshift menambah di awal bukan akhir.
+12. jumlahMember + 1 - Tidak error tapi hasil salah ("51") - Penyebab: string + number = konkatenasi.
+13. toFixed untuk rataRata - Tidak error tapi hasil salah - Penyebab: toFixed menghasilkan string.
+14. formatRupiah tanpa return - Tidak error tapi hasil salah (undefined) - Penyebab: lupa return.
+15. for (let kunci of harga) - MENGHENTIKAN PROGRAM (TypeError: harga is not iterable) - Penyebab: object tidak bisa for...of, harus for...in.
+
+JAWABAN:
+1. if (uangBayar = total) tidak error karena assignment itu valid di JavaScript dan mengembalikan nilai yang di-assign. Setelah baris itu uangBayar berubah menjadi nilai total (46620) dan kondisi bernilai truthy sehingga status selalu "Lunas".
+2. parseInt("100.000") menghasilkan 100 karena parseInt membaca dari kiri dan berhenti begitu ketemu karakter yang bukan angka, yaitu titik. Titik bukan bagian dari integer.
+*/
