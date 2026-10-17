@@ -14,7 +14,7 @@ Proyek kasir sederhana untuk Kedai Senja. Menghitung subtotal, diskon, promo, pa
 - Git dan GitHub
 
 ## Penulis
-Ahmad Yazid 
+Ahmad Yazid mubarok
 
 ## Hasil dari git log --oneline --graph
 * 10bd527 (HEAD -> master) readme.md
