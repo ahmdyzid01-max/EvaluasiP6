@@ -1,15 +1,14 @@
 # Evaluasi Pekan 6 - Kedai Senja
 
-Proyek kasir sederhana Kedai Senja dengan menu, transaksi, laporan harian, latihan logika, perbaikan kode, dan eksperimen JavaScript.
+Proyek kasir sederhana untuk Kedai Senja. Menghitung subtotal, diskon, promo, pajak, total, kembalian, dan status pembayaran. Dilengkapi latihan logika, perbaikan kode, dan eksperimen JavaScript.
 
 ## Cara Menjalankan
-- Buka `index.html` untuk program utama Kedai Senja
-- Buka `logika.html` untuk latihan logika
-- Buka `perbaikan.html` untuk kode yang diperbaiki
-- Buka `eksperimen.html` untuk tebak dan eksperimen
-- Semua hasil tampil di Console Browser (F12 > Console)
+- `index.html` : Program utama Kedai Senja. Buka di browser lalu lihat Console (F12).
+- `logika.html` : Latihan logika JavaScript Bagian 1-5. Buka di browser lalu lihat Console.
+- `perbaikan.html` : Kode perbaikan Bagian 6. Buka di browser lalu lihat Console.
+- `eksperimen.html` : Tebak dan eksperimen Bagian 7. Buka di browser lalu lihat Console.
 
-## Teknologi
+## Teknologi yang Digunakan
 - HTML
 - JavaScript
 - Git dan GitHub
@@ -17,8 +16,9 @@ Proyek kasir sederhana Kedai Senja dengan menu, transaksi, laporan harian, latih
 ## Penulis
 Ahmad Yazid
 
-## Git Log
-*   bcd2448 (HEAD -> master) - Kenapa pekerjaan dibagi ke ban
+## Hasil git log --oneline --graph
+* 10bd527 (HEAD -> master) readme.md
+*   bcd2448 - Kenapa pekerjaan dibagi ke ban
 |\  
 | * 41f2e68 (docs/tebak-jelaskan) experimen.html
 | * 3d3a51f 7.3:Jelaskan
@@ -37,8 +37,3 @@ Ahmad Yazid
 * c5df475 feat: mesin kasir
 * 0629089 feat: tambah data dan pembersihan data
 * 485d6b3 chore: inisialisasi proyek evaluasi pekan 6
-
-## Jawaban
-1. Pekerjaan dibagi ke banyak branch agar rapi, tidak campur aduk, mudah dicek per fitur, dan kalau ada error gampang cari di branch mana. Kalau semua di main akan berantakan dan susah kolaborasi.
-2. .gitignore berfungsi untuk memberitahu git file/folder apa yang tidak perlu di-track dan tidak di-upload ke GitHub. Contoh yang dimasukkan: node_modules/, .DS_Store, dist/.
-3. Merge lokal dilakukan langsung di komputer lewat perintah git merge di terminal. Pull Request dilakukan di GitHub, untuk minta review dan merge branch ke main lewat website, dengan diskusi dan approval dulu.
