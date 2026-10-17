@@ -124,3 +124,11 @@ for (const v of truthyValues) {
   else console.log("TIDAK MASUK (harusnya masuk):", v);
 }
 
+/*
+7.3 JELASKAN:
+1. "10" + 5 * 2 = "1010" karena * dikerjakan dulu (5*2=10), baru + karena kiri string jadi konkatenasi "10"+"10".
+2. potongan dan hapus sama isinya [20,30] karena slice dan splice sama-sama ambil index 1-2, tapi slice tidak ubah angka, splice menghapus 20,30 dari angka jadi [10,40].
+3. console.log(cetak(4)) mencetak dua baris karena di dalam cetak ada console.log(n*2) yang cetak 8, dan cetak tidak return apa-apa jadi return undefined yang dicetak oleh console.log luar.
+4. hasil "134" karena: i=1 -> hasil "1", i=2 -> continue loncat, i=3 -> "13", i=4 -> "134", i=5 -> break berhenti.
+5. do...while tetap jalan sekali karena cek kondisi di akhir, bukan di awal. Jadi blok dijalankan dulu baru dicek x<3.
+*/
