@@ -8,7 +8,7 @@ Proyek kasir sederhana untuk Kedai Senja. Menghitung subtotal, diskon, promo, pa
 - `perbaikan.html` : Kode perbaikan Bagian 6. Buka di browser lalu lihat Console.
 - `eksperimen.html` : Tebak dan eksperimen Bagian 7. Buka di browser lalu lihat Console.
 
-## Teknologi yang Digunakan
+## Teknologi yang Digunakan 
 - HTML
 - JavaScript
 - Git dan GitHub
