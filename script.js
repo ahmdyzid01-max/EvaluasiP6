@@ -281,3 +281,66 @@ Jawaban:
 5. Karena butuh info item valid, item tidak valid, dan subtotal sekaligus untuk struk dan stok.
 6. while di dalam for...of untuk mengurangi sisa terus sampai pecahan habis.
 */
+
+// Bagian 4: Laporan Harian
+function hitungTotalPendapatan(riwayat) {
+  let total = 0;
+  for (const h of riwayat) {
+    if (h.status === "LUNAS") {
+      total += h.total;
+    }
+  }
+  return total;
+}
+
+function hitungTransaksiByStatus(riwayat) {
+  const hasil = { LUNAS: 0, KURANG: 0, DITOLAK: 0 };
+  for (const h of riwayat) {
+    if (hasil[h.status] !== undefined) {
+      hasil[h.status]++;
+    }
+  }
+  return hasil;
+}
+
+function cariMenuTerlaris(riwayat) {
+  const hitung = {};
+  for (const h of riwayat) {
+    if (h.status !== "LUNAS") continue;
+    for (const item of h.itemValid) {
+      if (!hitung[item.menu]) {
+        hitung[item.menu] = 0;
+      }
+      hitung[item.menu] += item.jumlah;
+    }
+  }
+  let terlaris = null;
+  let jumlahMax = 0;
+  for (const nama in hitung) {
+    if (hitung[nama] > jumlahMax) {
+      jumlahMax = hitung[nama];
+      terlaris = nama;
+    }
+  }
+  return { nama: terlaris, jumlah: jumlahMax, semua: hitung };
+}
+
+function cetakLaporanHarian() {
+  const totalPendapatan = hitungTotalPendapatan(kasir.riwayat);
+  const byStatus = hitungTransaksiByStatus(kasir.riwayat);
+  const terlaris = cariMenuTerlaris(kasir.riwayat);
+  const totalTransaksi = kasir.riwayat.length;
+  const rataRata = totalTransaksi > 0 ? Math.round(totalPendapatan / byStatus.LUNAS) : 0;
+
+  console.log("===== LAPORAN HARIAN =====");
+  console.log(`Total Transaksi: ${totalTransaksi}`);
+  console.log(`LUNAS: ${byStatus.LUNAS}, KURANG: ${byStatus.KURANG}, DITOLAK: ${byStatus.DITOLAK}`);
+  console.log(`Total Pendapatan: ${formatRupiah(totalPendapatan)}`);
+  console.log(`Rata-rata Transaksi LUNAS: ${formatRupiah(rataRata)}`);
+  console.log(`Menu Terlaris: ${terlaris.nama} (${terlaris.jumlah} porsi)`);
+  console.log(`Saldo Kas Akhir: ${formatRupiah(kasir.saldoKas)}`);
+  console.log("Semua penjualan menu:", JSON.stringify(terlaris.semua));
+}
+
+cetakLaporanHarian();
+
