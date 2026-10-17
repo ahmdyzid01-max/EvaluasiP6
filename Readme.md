@@ -1,3 +1,5 @@
+<<<<<<<<<<<<<<HEAD
+
 # Evaluasi Pekan 6 - Kedai Senja
 
 Proyek kasir sederhana untuk Kedai Senja. Menghitung subtotal, diskon, promo, pajak, total, kembalian, dan status pembayaran. Dilengkapi latihan logika, perbaikan kode, dan eksperimen JavaScript.
@@ -8,7 +10,11 @@ Proyek kasir sederhana untuk Kedai Senja. Menghitung subtotal, diskon, promo, pa
 - `perbaikan.html` : Kode perbaikan Bagian 6. Buka di browser lalu lihat Console.
 - `eksperimen.html` : Tebak dan eksperimen Bagian 7. Buka di browser lalu lihat Console.
 
+<<<<<<< HEAD
 ## Teknologi yang Digunakan 
+=======
+## Teknologi yang Digunakan
+>>>>>>> 3133f108515cc11905a166c528228bd7c44b280c
 - HTML
 - JavaScript
 - Git dan GitHub
@@ -36,4 +42,8 @@ Ahmad Yazid
 * 7b2e18e (feat/data-dan-pembersihan) fix
 * c5df475 feat: mesin kasir
 * 0629089 feat: tambah data dan pembersihan data
+<<<<<<< HEAD
 * 485d6b3 chore: inisialisasi proyek evaluasi pekan 6
+=======
+* 485d6b3 chore: inisialisasi proyek evaluasi pekan 6
+>>>>>>> 3133f108515cc11905a166c528228bd7c44b280c
