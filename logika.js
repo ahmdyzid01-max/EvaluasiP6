@@ -101,3 +101,11 @@ console.log("15 ->", cekBilanganPrima(15));
 console.log("1 ->", cekBilanganPrima(1));
 console.log("0 ->", cekBilanganPrima(0));
 
+/*
+JAWABAN:
+1. Contoh cekBilanganPrima(17): i=2 -> 17%2 !=0 lanjut, i=3 -> 17%3 !=0 lanjut, i=4 -> 17%4 !=0. Loop berhenti di i=5 karena 5>sqrt(17)~4.12, return true.
+2. Array asli tidak berubah karena hapusDuplikat membuat array baru `hasil` dan hanya push ke situ, tidak memakai push/splice ke `daftar`. Memakai includes karena simpel, hanya cek ada/tidak, tanpa mengubah array asli.
+3. Ya, memakai break implisit lewat return false. Jika baris return false dihapus, hasil jadi salah karena function akan terus jalan dan selalu return true di akhir.
+4. Karena [] tidak punya nilai terbesar, mengembalikan 0 akan bohong karena 0 bisa jadi nilai valid di array lain. null artinya tidak ada data.
+5. hitungVokal memakai for...of karena hanya butuh nilai char, tidak butuh indeks. cariTerbesar memakai for klasik karena butuh indeks untuk melacak posisi nilai terbesar.
+*/
